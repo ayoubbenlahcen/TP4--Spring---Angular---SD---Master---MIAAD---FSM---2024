@@ -287,7 +287,20 @@ json-server -w data/db.json -p 8089
 Après avoir démarré json-server, vous verrez des messages dans le terminal indiquant que le serveur est en cours d'exécution. Il affichera également l'URL locale à laquelle votre API est disponible. Par exemple :
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/b03d2f51-87b0-4189-b999-18e0513ab546)
 
+Avec l'API REST que json-server nous propose, toutes les opérations de manipulation de la base de données peuvent être réalisées : POST (ajout), PUT (mise à jour), DELETE (suppression). La recherche fonctionne également. Cependant, ce n'est pas efficace pour de grandes quantités de données, mais il est très utile pour tester le frontend.
+
+#### Nous devons créer un constructeur dans la classe de composant ProductsComponent pour injecter un objet de type HttpClient comme suit :
+
+Pour afficher la liste des produits présents dans la base de données créée dans le fichier db.json, nous allons effectuer quelques modifications dans la classe du composant ProductsComponent. Voici ce que nous allons faire :
+Implémenter l'interface OnInit et redéfinir la méthode ngOnInit() dans la classe ProductsComponent.
+Utiliser le service HTTP pour récupérer la liste des produits en envoyant une requête GET vers le backend comme suit :
 
 
+##### Voici comment cela fonctionne :
+Pour chaque requête envoyée au backend, que ce soit GET, POST, DELETE, toutes ces méthodes retournent des objets de type Observable.
+Dans JavaScript, étant donné que c'est un langage single-thread (mono-tâche), pour créer des applications réactives et non bloquantes, nous utilisons des observables.
+La méthode get retourne un objet de type Observable. Nous devons donc nous abonner (subscribe) pour obtenir le résultat final.
+Pour spécifier comment le résultat de la méthode get sera retourné et le stocker dans un objet de type liste ou tableau, nous devons préciser le type attendu après l'appel à get. Cela se fait en ajoutant le type générique lors de l'appel de la méthode get. Voici comment procéder :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/06399254-3346-40ac-b77d-6ddfc926068a)
 
 
