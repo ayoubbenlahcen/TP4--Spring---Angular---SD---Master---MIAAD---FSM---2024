@@ -362,5 +362,56 @@ En fait, nous avons fait la même chose pour la fonctionnalité de mise à jour 
 
 Voici comment nous avons implémenté dans la classe de composant ProductComponent les deux fonctions getProducts() et aussi la fonction pour faire la mise à jour de l’état d’un produit jusqu’à maintenant :
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/67aa6ab1-54e1-4c50-a958-6f3148fda53b)
-
 Comme on a fait la description de la requéte a  l’interieur de chacun de ces fonctions.
+
+Remarque très importante :
+    Utilisation d'un service : Pour utiliser un service dans notre projet, il faut le déclarer dans le fichier
+    app.module.ts de notre application, précisément dans la section providers. Voici comment on va faire cela :
+    ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/1fd6bdce-9fcb-42ee-b1bc-372d9e557adc)
+    
+Cependant, grâce à l'attribut providedIn: 'root' dans l'annotation @Injectable, il n'est pas obligatoire de le déclarer explicitement dans app.module.ts. Cet attribut signifie que le service est disponible pour tout module ou composant qui souhaite l'injecter.
+
+##### Les services :
+  - Les services sont instanciés une seule fois.
+  - Ils peuvent contenir des fonctions ainsi que des données.
+  - Grâce aux services, nous pouvons injecter un service quelconque dans d'autres composants.
+  - Les services permettent de partager les mêmes données et les mêmes traitements entre l'ensemble des
+    composants.
+  - Les services permettent de séparer la logique métier de la logique de présentation.
+
+##### Structuration de la programmation :
+Pour structurer notre application, par exemple en précisant à Angular que lors de l'exécution de la fonction getProducts(), nous devons obtenir une liste de produits avec les attributs : Id, name, price, checked.
+Pour ne pas compliquer les choses, nous allons déclarer la classe Product avec les différents attributs précisés précédemment.
+
+Au lieu d'utiliser le type any, nous allons créer un modèle pour les produits. Par exemple, remplacer l'instruction suivante :
+          return this.httpClient.get<Array<any>>("http://localhost:8089/products/");
+par :
+          return this.httpClient.get<Array<Product>>("http://localhost:8089/products/");
+où Product est une classe (ou modèle) que nous devons créer.
+
+#### Création d'un package model : 
+Pour organiser notre code, nous allons créer un package appelé model qui contiendra tous nos modèles, y compris le modèle Product que nous allons utiliser dans notre cas. Voici comment procéder :
+
+Créez un dossier nommé models dans votre application Angular.
+À l'intérieur de ce dossier, créez un fichier nommé product.model.ts.
+Définissez le modèle Product dans ce fichier comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/e5bfa52e-6abf-49f8-8e35-d471e8aad381)
+
+#### Remarque : 
+  Assurez-vous que les noms des attributs de l'interface Product dans votre modèle correspondent aux noms des
+  champs dans votre fichier db.json (qui agit comme votre base de données). Par exemple :
+
+#### Modifications dans la classe ProductsComponent
+Nous allons maintenant modifier la classe de composant ProductsComponent pour remplacer toutes les occurrences de any par Product là où cela est approprié.
+Ouvrez products.component.ts et faites les modifications suivantes :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/3e8716a4-d33f-4c0f-ad06-6117508282c7)
+
+Aussi dans product.service.ts :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/c7ae3a4e-b3f5-48da-87b6-8b38adf6e8a4)
+
+
+
+
+
+
+
