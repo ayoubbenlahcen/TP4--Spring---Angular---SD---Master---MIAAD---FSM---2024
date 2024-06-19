@@ -208,7 +208,58 @@ Maintenant, si vous souhaitez ajouter une barre de recherche, voici comment proc
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/aac39388-94b5-4993-8733-50dc6a95e45f)
 
 Maintenant, je vais ajouter deux importations dans le fichier app.module.ts pour gérer les formulaires : FormsModule et ReactiveFormsModule. Ces deux modules sont utilisés pour manipuler les formulaires, chacun ayant ses propres caractéristiques.
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/cc8af1dd-b4c1-44ce-979f-335273950d76)
 
+Lorsque nous utilisons la manipulation de formulaires avec FormsModule, nous pouvons utiliser le data binding comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/09bd83ea-d6f5-4d09-af15-1a4910d703c4)
+
+Il est important de noter que grâce au data binding utilisé par Angular, toute valeur saisie dans un <input> sera automatiquement liée à une propriété du composant, comme keyword. Cela signifie que dès que l'utilisateur saisit quelque chose dans l'input, cette valeur est directement mise à jour dans la propriété keyword du composant.
+
+Toutefois, pour que le data binding fonctionne correctement, il est essentiel de ne pas placer l'attribut [(ngModel)]="keyword" à l'intérieur d'une balise <form>. Si vous le faites, le data binding ne fonctionnera pas comme attendu, à moins d'utiliser ReactiveFormsModule.
+
+Pour résoudre ce problème de data binding, nous devons modifier le code comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/21c819a3-3b3a-4083-9ba3-8cc9b4a428d1)
+
+Maintenant, chaque fois que je saisis quelque chose dans l'input, la valeur de keyword est mise à jour instantanément. Voici comment cela s'affiche :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/b2bcc990-9901-40a0-8dfe-1bbf30ef0f97)
+
+=======>  Maintenant, la valeur de keyword est la chaîne "je suis ayoub".
+
+Pour effectuer la recherche des produits selon le mot-clé saisi, nous allons ajouter une méthode dans la classe ProductsComponent. Assurez-vous que keyword est déclaré comme attribut dans cette classe.
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/1d5cc952-a212-4b5f-8ddd-ed46130aea07)
+
+N'oubliez pas d'ajouter (click)="search()" dans le bouton "Search". Voici comment vous pouvez le faire :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/cbeecd35-65a1-4fa7-9677-adf56b75c320)
+
+Maintenant, lorsque vous cliquez sur le bouton "Search", la méthode search() sera appelée dans ProductsComponent, où vous pourrez implémenter la logique de recherche pour interagir avec votre backend.
+
+Pour mettre en état actif l'un des boutons "Home" ou "Products" et changer la couleur de fond en rouge par exemple, selon que vous êtes sur la page "Home" ou "Products", vous allez remplacer routerLink="/home" par (click)="gotoHome()" dans le bouton "Home" et (click)="gotoProducts()" dans le bouton "Products".
+Voici comment vous pouvez le faire :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/20d02ce8-d8f8-4ca8-925b-1159e39e130d)
+
+Pour créer les méthodes gotoHome() et gotoProducts() dans AppComponent et utiliser l'objet Router pour effectuer les redirections vers les pages "home" et "products", vous devez injecter un objet de type Router dans votre classe AppComponent.
+Voici comment vous pouvez procéder :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/ac770dd4-a444-44f7-8505-f5cb195390e1)
+
+Dans app.component.ts, importez Router depuis @angular/router et utilisez-le pour créer les méthodes de redirection :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/962723e3-e0b7-423c-a67f-4d38479b5554)
+
+**** Petit Explication *****************************************************************************************
+Dans ces méthodes, this.router.navigate(['/home']) et this.router.navigate(['/products']) sont utilisés pour naviguer vers les routes définies dans AppRoutingModule (ou tout autre module de routage que vous avez créé).
+
+Revenons maintenant au data binding. Qu'est-ce que ce concept ?
+Le data binding est un mécanisme qui lie les données stockées dans la classe des composants avec ce qui est affiché dans la vue (template). Cela permet de synchroniser automatiquement les données entre le modèle (classe du composant) et la vue (template).
+
+Par exemple, si vous avez une variable Data dans votre composant et que vous souhaitez l'afficher dans votre vue, vous pouvez utiliser la syntaxe de l'interpolation des chaînes :
+
+Lorsque vous utilisez l'interpolation ({{ }}), Angular va remplacer {{ Data }} par la valeur actuelle de Data définie dans votre composant. Si vous mettez à jour la valeur de Data dans votre composant (par exemple, à partir d'un champ de saisie), Angular mettra automatiquement à jour la vue pour refléter cette nouvelle valeur.
+
+Le data binding fonctionne dans les deux sens : lorsque les données dans le composant changent, la vue est mise à jour pour refléter ces changements, et vice versa. C'est comme si le composant "s'abonne" aux changements de données et que la vue est "notifiée" pour se mettre à jour en conséquence.
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/2b3defc8-3b2c-4b4b-ae15-3f44b57d21aa)
+
+***************************************************************************************************************
+
+## RESTE api  (utilisation de nodeJS)
 
 
 
