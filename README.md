@@ -303,4 +303,64 @@ La méthode get retourne un objet de type Observable. Nous devons donc nous abon
 Pour spécifier comment le résultat de la méthode get sera retourné et le stocker dans un objet de type liste ou tableau, nous devons préciser le type attendu après l'appel à get. Cela se fait en ajoutant le type générique lors de l'appel de la méthode get. Voici comment procéder :
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/06399254-3346-40ac-b77d-6ddfc926068a)
 
+Nous voulons maintenant changer l'état d'un produit de "checked" à "unchecked" et répercuter ce changement dans la base de données. Voici comment nous allons procéder :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/672511e2-cd9b-4707-a73f-db5f697db731)
 
+Lorsque nous envoyons une requête au backend, nous devons spécifier l'ID du produit dont nous voulons mettre à jour l'état. Cependant, il est important de se rappeler que chaque fois que nous mettons à jour la base de données, nous devons également mettre à jour la partie front-end pour visualiser le changement.
+
+Pour mieux comprendre, regardons le code que nous avons créé pour gérer l'état d'un produit. Au début, nous devons passer l'ID du produit en paramètre à la fonction, puis envoyer une requête au backend en exécutant :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/8a456172-708e-4a1e-9f03-973e297d85b6)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/70322630-0b49-45db-a1bf-0be42ba01a0d)
+
+
+#### Une question : pourquoi effectuons-nous le changement deux fois, à la fois dans le backend et le frontend ?
+
+##### Réponse :
+tout simplement pour ne pas perdre de temps à recharger à nouveau les données. Cela signifie que nous n'avons pas besoin de revisiter la base de données pour récupérer à nouveau la liste des produits. Oui, cela fonctionne, mais techniquement parlant, vous allez perdre du temps à le faire.
+
+Avec le data binding, je n'ai pas besoin de le faire, car celui-ci garantit la liaison entre les variables de la classe du composant et la vue. En d'autres termes, si nous modifions l'objet produit, le frontend sera immédiatement informé de ce changement.
+
+#### Remarque importante :
+    Ici, nous trouvons la différence entre les applications rendues en HTML côté serveur et les applications
+    rendues en HTML côté client. Pour les applications rendues côté serveur, je suis obligé de recharger toute
+    la page pour chaque modification, même si elle est simple. En revanche, pour les applications rendues côté
+    client, ce n'est pas nécessaire.
+
+**************************************************************************************************************
+### Après la pause : 1:15:59
+
+1. Dans un premier temps, nous avons besoin de créer un service. Avec Angular, voici comment nous allons faire cela en tapant la commande suivante :  $ ng g s services/product
+Cette commande va créer un service, ajouter un dossier nommé services dans le dossier app, et y créer notre service nommé product. Voici le résultat obtenu :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/1a9acdb6-244c-4e47-b567-f5a57d791e74)
+
+Dans le fichier product.service.ts, voici ce que nous avons :
+À savoir que dans le fichier product.service.ts, nous trouvons l'annotation suivante :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/f5035cf3-bf85-4623-9c4f-90de3ff7194d)
+
+Cela signifie que ce service est destiné à être injecté dans un composant, par exemple. Au démarrage, il sera instancié une fois, et une fois que vous l'avez instancié, vous pouvez l'injecter où vous voulez, dans n'importe quel composant.
+
+#### Remarque :
+  Quel est l'avantage des services ? C'est que dans un service, nous allons généralement déclarer des méthodes.
+  Une bonne pratique est de faire toutes les méthodes pour interagir avec le backend dans les services. Par
+  exemple, dans notre cas, nous allons déclarer des méthodes pour manipuler les produits.
+
+Jusqu'à maintenant, nous avons besoin de créer une méthode pour récupérer et chercher les produits à partir de la base de données (dans le backend) qui va prendre le nom de getProducts() dans le fichier product.service.ts. Voici comment nous allons faire cela :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/1c1c5c02-c299-4ba5-b6ac-42bcefb3bb18)
+
+Attention :
+    Il faut injecter un objet de type HttpClient dans cette classe. L'une des manières de le faire est, comme
+    toujours, dans le constructeur, en ajoutant  private httpClient: HttpClient  comme paramètre.
+    
+    La deuxième chose à noter ici, comme indiqué dans le code en commentaire, est que nous essayons de définir
+    le retour de la fonction getProducts() sous forme Observable<any>. Cela permet de résoudre le problème de
+    temps que peut prendre le backend pour traiter la requête, ce qui nous permet aussi de traiter le problème
+    de blocage de l'interface utilisateur. En d'autres termes, la gestion de cette réponse se fera au niveau de
+    la classe de composant.
+
+
+En fait, nous avons fait la même chose pour la fonctionnalité de mise à jour de l’état d’un produit. Nous avons laissé la description de la requête à la fonction qui se trouve dans la classe de composant et qui utilise ce service pour effectuer la mise à jour. Vous pouvez voir cela dans le code précédent comment nous avons fait cela.
+
+Voici comment nous avons implémenté dans la classe de composant ProductComponent les deux fonctions getProducts() et aussi la fonction pour faire la mise à jour de l’état d’un produit jusqu’à maintenant :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/67aa6ab1-54e1-4c50-a958-6f3148fda53b)
+
+Comme on a fait la description de la requéte a  l’interieur de chacun de ces fonctions.
