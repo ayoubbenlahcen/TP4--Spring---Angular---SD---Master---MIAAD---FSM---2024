@@ -261,6 +261,32 @@ Le data binding fonctionne dans les deux sens : lorsque les données dans le com
 
 ## RESTE api  (utilisation de nodeJS)
 
+Pour créer un backend rapidement avec une API REST en utilisant json-server, suivez les étapes ci-dessous :
+
+#### Installation de json-server :
+Assurez-vous d'avoir Node.js installé sur votre machine. Ensuite, installez json-server globalement à l'aide de npm avec la commande suivante :
+
+Copier le code
+npm install -g json-server
+#### Création de la structure pour la base de données :
+
+Créez un dossier nommé data à la racine de votre projet (ou à l'emplacement de votre choix).
+À l'intérieur du dossier data, créez un fichier nommé db.json. C'est dans ce fichier que vous définirez vos données JSON simulées, telles que des collections d'objets.
+Exemple de structure de db.json pour une collection de clients :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/ad9a609a-96d5-43e9-870e-950103b669dd)
+
+#### Démarrage de json-server :
+
+####  Ouvrez votre terminal.
+#### Utilisez la commande suivante pour démarrer json-server et spécifiez le chemin vers votre fichier db.json :
+
+json-server -w data/db.json -p 8089
+-w data/db.json indique à json-server de surveiller les modifications dans db.json.
+-p 8089 spécifie le port sur lequel json-server sera accessible localement (8089 dans cet exemple).
+#### Accès à votre API 
+Après avoir démarré json-server, vous verrez des messages dans le terminal indiquant que le serveur est en cours d'exécution. Il affichera également l'URL locale à laquelle votre API est disponible. Par exemple :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/b03d2f51-87b0-4189-b999-18e0513ab546)
+
 
 
 
