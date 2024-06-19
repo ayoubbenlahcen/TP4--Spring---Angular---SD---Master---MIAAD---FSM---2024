@@ -186,5 +186,31 @@ La manière simple de créer une liste de produits est de créer une liste liste
 Bien, maintenant, où allons-nous afficher cette liste de produits ? C'est dans products.component.html. Alors, nous allons ouvrir ce fichier et ajouter ce qui suit :
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/ca27c0bf-5bc4-488f-aa58-bd8c11dcb74e)
 
+On a ajouté dans le products.component.html le bloc suivant où je veux afficher ma liste de produits :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/e83a6f18-1569-47c3-838b-426c2d3e08e4)
+
+Ensuite, dans la méthode ngOnInit(), nous initialisons la liste des produits que nous souhaitons afficher, comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/03e51c84-90fd-428a-8b85-cfd9ab6653ca)
+
+Comme vous pouvez le voir, pour la liste des produits, nous avons déclaré cette dernière et nous lui avons attribué le type any[], ce qui signifie que la variable produits peut prendre comme valeur n'importe quelle variable de n'importe quel type. Pour Angular, cela correspond à des types comme String, number, etc.
+
+### On rappelle s'il vous plaît qu'à ce stade, nous avons initialisé la liste des produits de manière simple. En réalité, nous devrons envoyer une requête vers le backend pour récupérer la liste des produits depuis la base de données.
+
+Il est essentiel de comprendre que lorsqu'on envoie une requête vers le backend, cela prend du temps. Pour éviter tout problème dans votre application, nous devons conditionner l'affichage de la liste des produits dans le fichier products.component.html. Voici comment nous pouvons régler ce problème en utilisant *ngIf :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/baa9c5f9-54a6-4cfb-ad23-e77747ca6f8e)
+
+Pour ajouter un bouton permettant de supprimer un produit, voici comment vous pouvez le faire :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/34e674bb-809d-40fe-b7e5-eb505ca8f79f)
+
+Comme vous pouvez le voir, nous avons ajouté un bouton avec (click)="deleteProduct()", où deleteProduct() est une méthode que nous devons ajouter à la classe ProductsComponent.
+
+Maintenant, si vous souhaitez ajouter une barre de recherche, voici comment procéder dans products.component.html. Nous allons ajouter un formulaire :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/aac39388-94b5-4993-8733-50dc6a95e45f)
+
+Maintenant, je vais ajouter deux importations dans le fichier app.module.ts pour gérer les formulaires : FormsModule et ReactiveFormsModule. Ces deux modules sont utilisés pour manipuler les formulaires, chacun ayant ses propres caractéristiques.
+
+
+
+
 
 
