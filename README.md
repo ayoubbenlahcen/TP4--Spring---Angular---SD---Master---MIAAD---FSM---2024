@@ -555,3 +555,50 @@ Nous allons modifier la condition qui nous permet d'afficher le spinner comme su
     observable. Ainsi, chaque fois que nous voulons l'utiliser ou le consulter, nous pouvons le faire en
     souscrivant pour récupérer sa valeur et ensuite l'affecter à d'autres variables.
 
+
+Dans cette partie, nous allons voir comment mettre en place un système d’authentification avec Angular.
+
+Pour commencer, nous allons créer un nouveau composant appelé "login". Voici le code à ajouter :
+  1. login.component.html :
+     ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/f4f8ca72-72ad-4916-884c-506ca723a02e)
+
+  3. login.component.ts :
+     ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/378cbf67-9d45-4cf6-a3fd-0e779256a2b1)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/e1548e98-63de-4526-900a-de9ca6ad2b98)
+
+Actuellement, la sécurité n'est pas encore implémentée, mais nous avons une autre modification à faire dans notre système de routage, spécifiquement dans le fichier app.routing.ts :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/9a15af5a-3b95-4674-bf50-2c20c64d6196)
+
+Voilà, cela signifie que dans Node.js, si je veux visiter n'importe quel composant qui est un enfant de AdminTemplateComponent, je dois spécifier son chemin comme "/admin/nom_composant_enfant". Notre travail se concentre maintenant sur la navigation vers le composant de la barre de navigation (navbar) et le changement des routes vers les différents composants spécifiés comme enfants de admin.
+
+Ensuite, nous allons créer un composant appelé "login", ainsi qu'un service appelé "AuthService". En plus de ces deux éléments, nous allons utiliser le service déjà créé "appState.service.ts". Nous allons essayer de créer un autre dictionnaire à côté de "productsState" pour gérer le statut de connexion (authentification).
+
+login.component.html :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/e345be67-6237-48f6-80b7-c4d73e23a24b)
+
+Login.component.ts:
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/481827c6-301b-4c8b-b57f-68be088b694f)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/8a622465-e247-4657-8d20-d147feb9cf4c)
+
+Nous avons effectué une petite modification dans navbar.component.html et également dans navbar.component.ts, où nous avons utilisé une petite section <div> pour les utilisateurs non connectés avec un bouton <button (click)= 'logout()'>Logout</button>. Cela nous permet d'afficher le nom d'utilisateur connecté et de fournir un bouton pour se déconnecter. Ensuite, nous avons créé une fonction nécessaire dans navbar.component.ts.
+
+Il ne faut pas oublier que dans le fichier db.sql, qui contient le schéma de notre base de données, nous avons créé une table Users qui contient un ensemble d'utilisateurs ayant accès à notre application, comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/3f07dfff-0434-44da-b5af-eb76cdbd5423)
+
+Alors comme vous le voyez ici, notre table contient 4 champs : id, password, rules et token. Le plus important pour nous est le token, qui est une chaîne codée à partir de trois points importants : Token = fonction(header, payload ou bien data, signature). Voici la structure de chacun de ces paramètres :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/4eeb9e2f-7be2-4c88-927f-7da19a14ce1b)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/bb9f8f3e-c463-43de-9dfc-7698e1598753)
+
+Alors jusqu’à maintenant, nous n'avons pas inclus la partie sécurité, car n'importe quel utilisateur peut accéder à nos composants simplement par les URL et il est également possible de commettre des actions indésirables.
+
+Heureusement, il existe un concept qui nous permet de traiter cela (la sécurité) : les gardes (guards), qui sont des services nous permettant de protéger les routes.
+
+Voici comment créer un garde :
+                      $ ng g g guards/authentication
+                      
+Après avoir lancé cette commande, il faut choisir le type de garde. Il existe différents types, mais nous allons choisir :  CanActivate
+
+Pour notre besoin, nous avons besoin de deux gardes : authentication et authorization, que nous allons créer.
+
+
+
