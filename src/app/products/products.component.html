@@ -1,0 +1,60 @@
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-body">
+        <div>
+          <input class="p-1"  type="text" [(ngModel)]="this.appStateService.productsState.keyword">
+          <button  (click)="SearchProducts()"
+                   class="btn btn-outline-success ms-1">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Name</th> <th>Price</th> <th>Checked</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of this.appStateService.productsState.products ">
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+          <td *ngIf="this.appStateService.authState.roles.includes('ADMIN')">
+            <button (click)="handleCheckProduct(product)"
+                    class="btn btn-outline-success">
+              <i [class]="product.checked?'bi bi-check':'bi bi-circle'"></i>
+            </button>
+          </td>
+          <td *ngIf="this.appStateService.authState.roles.includes('ADMIN')">
+            <button (click)="handleDelete(product)" class="btn btn-outline-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+
+            <button (click)="handleEditProduct(product)" class="btn btn-outline-success ms-2">
+              <i class="bi bi-pen"></i>
+            </button>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+
+      <ul class="nav nav-pills">
+        <li   *ngFor="let page of [].constructor(this.appStateService.productsState.totalPages); let  i = index">
+          <!--
+          on peut colorierle button qui comment indice l'indce qui corrippent a this.currentPage par une autre style
+          on utlisant :
+
+          [class.btn-success]="this.currentPage==(i+1)" s'adevrez marcher
+          si il ne  s'amarche pas c'est pas improbleme parceque  c'est pas moi qui a creer Angular
+          -->
+          <button (click)="handelGotToPage(i+1)"
+                  [ngClass]="this.appStateService.productsState.currentPage==(i+1) ? 'btn btn-success m-1': 'btn btn-outline-success m-1' "
+                  class="">{{i+1}}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

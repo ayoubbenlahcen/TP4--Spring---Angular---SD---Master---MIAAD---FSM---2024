@@ -1,0 +1,52 @@
+{"users" :  [{
+  "id": "user1" ,
+  "password": "MTIzNA==" ,
+  "rules" : ["USER", "ADMIN"] ,
+  "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoxNTE2MjM5MDIyLCJuYmYiOjE1MTYyMzkwMjIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODg4OC9hdXRoIiwiZmlzdG5hbWUiOiJtb2hhbWVkIiwibGFzdG5hbWUiOiJ5b3Vzc2ZpIiwiZW1haWwiOiJtZWRAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdfQ.L2cNbrkjku5NLcBQboeNOmtj8LyDuUv6sIK7ji4cT28"
+},
+  {
+    "id": "user2" ,
+    "password": "MTIzNA==" ,
+    "rules" : ["USER"] ,
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoxNTE2MjM5MDIyLCJuYmYiOjE1MTYyMzkwMjIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODg4OC9hdXRoIiwiZmlzdG5hbWUiOiJtb2hhbWVkIiwibGFzdG5hbWUiOiJ5b3Vzc2ZpIiwiZW1haWwiOiJtZWRAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdfQ.L1asAxJFKn8bSzqZSxLH7A11HzjO8dwx0AOKszMwHv8"
+  },
+  {
+    "id": "admin" ,
+    "password": "MTIzNA==" ,
+    "rules" : ["USER" , "ADMIN"] ,
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoxNTE2MjM5MDIyLCJuYmYiOjE1MTYyMzkwMjIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODg4OC9hdXRoIiwiZmlzdG5hbWUiOiJtb2hhbWVkIiwibGFzdG5hbWUiOiJ5b3Vzc2ZpIiwiZW1haWwiOiJtZWRAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiIsIkFETUlOIl19.vrFYRAKd0Zxi4h0XJxSMT3IkbuVchBjL9_H6D_VfyLU"
+  }],
+
+  "products": [
+    {
+      "id": 2,
+      "name": "Computer2",
+      "price": 5600,
+      "checked": true
+    },
+    {
+      "id": 3,
+      "name": "Computer1",
+      "price": 5600,
+      "checked": true
+    },
+    {
+      "id": 4,
+      "name": "Smart 68",
+      "price": "4500",
+      "checked": true
+    },
+    {
+      "name": "Smart 67",
+      "price": "4500",
+      "checked": true,
+      "id": 5
+    },
+    {
+      "name": "mmmmm",
+      "price": "5400",
+      "checked": true,
+      "id": 6
+    }
+  ]
+}

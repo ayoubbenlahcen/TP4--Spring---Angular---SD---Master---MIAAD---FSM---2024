@@ -1,0 +1,30 @@
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div *ngIf="this.editProductForm" >
+          <!-- on a jouté cette pour eviter le probleme quant on peut reconter
+              Lorsque la requete est envoyer vers le back end car possible que editFormGroup
+              qui'est envore nno inialise c'est a dire ne contient pas d'information
+          -->
+          <h3 class="mb-3">Edit product form</h3>
+          <form [formGroup]="editProductForm" (ngSubmit)="updateProduct()">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input class="form-control" formControlName="name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input class="form-control" formControlName="price">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Checked</label>
+              <input type="checkbox" class="form-check-input" formControlName="checked">
+            </div>
+            <button [disabled]="editProductForm.invalid" class="btn btn-success">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
