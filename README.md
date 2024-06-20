@@ -409,9 +409,149 @@ Ouvrez products.component.ts et faites les modifications suivantes :
 Aussi dans product.service.ts :
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/c7ae3a4e-b3f5-48da-87b6-8b38adf6e8a4)
 
+1:30 :15 **************************************************************************************************                                                                                                                     
+#### Astuce : 
+  On peut obtenir le modèle d'un ensemble de données en visitant l'un des sites qui convertissent des données 
+  JSON en TypeScript, par exemple
+
+#### Question : quel est la différence entre Entité et model ?
+  Alors le model  sont les structure de donne (des classes) manipuler dans  l’application
+  Par contre un Entité c’est un model persistant tel que cette persitance est géré par  un frame Work de
+  mapping relationnel comme JPA . 
 
 
+## Partie 3  de ce TP (l’utilisation des dashboards)
+
+Alors dans la vidéo 3 et après, quand on veut commenter sur la façon dont on va faire la pagination en utilisant notre backend json-server démarré sur le port 8089 dans notre application, comme nous l'avons dit pour la pagination, on a deux attributs que l'on peut utiliser ou spécifier à json-server pour qu'il nous récupère les pages quand on en a besoin :
+
+_page= par exemple 4
+
+_limit= par exemple 7
+
+Cela signifie que je veux, par exemple, la page numéro 4 où chaque page aura une taille de 7 produits (c’est-à-dire 7 produits par page).
+
+Voici comment on peut le faire en créant une fonction à l’intérieur du composant ProductComponent qui utilisera le service ProductService que nous avons créé avec la commande suivante :
+
+                $ ng g services/product
+
+Dans ProductService, nous avons essayé d’inclure toutes les fonctions liées à la logique métier de notre application, c’est-à-dire les fonctions qui contiendront par exemple nos requêtes vers le backend. Cela sera utilisé par le composant pour simplifier le code et le rendre plus lisible, ce qui est une bonne pratique à suivre lors du développement d’un projet informatique.
+
+Aussi, cette fonction nous permettra de rechercher un produit en utilisant un mot-clé.
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/97883294-9404-4b98-bace-21b904b36b15)
+
+De plus, nous avons appris comment manipuler un formulaire pour éditer un produit, comme le montre le nouveau composant appelé EditProductComponent. Nous avons initialisé un formulaire en utilisant le module ReactiveFormsModule. Il est également possible de manipuler les formulaires avec le module FormsModule :
+
+On déclare le module utilisé comme suit dans le fichier app.module.ts :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/ddad0695-8a95-4418-8bff-69b3897732bd)
+
+Ensuite, nous allons créer une variable de type FormGroup qui contiendra les champs de notre formulaire dans le composant NewProductComponent, comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/3e8dac37-5752-4435-9f6e-c89c50102a8c)
+
+Ici dans notre code, nous avons tenté, comme je l'ai déjà mentionné, de créer un objet de type FormGroup. À l'aide d'un objet de type FormBuilder, nous initialisons le FormGroup créé. Pour cela, nous essayons de l'injecter dans le constructeur et nous injectons également un objet de type ProductService pour manipuler les produits dans la base de données après chaque modification.
+
+Lorsque ce composant sera chargé (ou lancé), nous devons créer l'objet FormGroup. C'est pourquoi nous implémentons l'interface OnInit, qui contient une méthode que nous devons redéfinir : ngOnInit(). Cette méthode est appelée la première fois que le composant est chargé. C'est ici que nous initialisons le formulaire en plaçant les valeurs du produit à éditer dans les valeurs de ce formulaire. Pour visualiser les informations du produit à éditer dans l'interface utilisateur, nous ajoutons également des validateurs pour certains attributs.
+
+La fonction qui va sauvegarder les modifications est la suivante :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/ce6d0cce-a6cf-4ed9-a79f-a1c054bd08db)
+
+Jusqu'à présent, nous avons accompli cela. La phase suivante consiste à utiliser quelques dashboards ou à afficher quelques statistiques.
+
+Notre objectif maintenant est de compléter l'interface suivante :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/de1e4cd6-c681-464c-a9b1-9e6f9e359293)
+
+Pour qu'elle soit structurée comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/5ca74581-fc5e-4206-a8ff-912d647e76e3)
+
+Voici comment nous pouvons y parvenir :
+
+Supposons, par exemple, que nous avons construit un composant pour la deuxième interface que nous appellerons, par exemple, "Composant2". Le défi que nous pourrions rencontrer est que les données de "Composant2" proviennent d'un ensemble d'autres composants. Comment gérons-nous ces données ?
+
+En général, dans une deuxième interface, nous observons une hiérarchie de composants. Par exemple, le composant contenant les tableaux de bord peut contenir des données qui proviennent du sous-composant qui liste les produits.
+
+L'une des solutions consiste à utiliser les entrées (inputs) et les sorties (outputs), mais cette méthode n'est pas toujours optimale.
+
+C'est pourquoi il est souvent plus utile, lorsque des données doivent être partagées entre différents composants d'une application, d'opter pour des services. Ces services permettent à chaque composant d'accéder aux mêmes données sans avoir à dépendre uniquement des entrées et sorties. C'est ce qu'on appelle le state, c'est l'état de l'application.
+
+Alors dans cette situation, il est très important de centraliser les données de l’application dans un service appelé AppState, tel que ce dernier est un service dans lequel nous allons mettre l’état de l’application. Vous allez voir que cela va nous simplifier le processus de manipulation de données dans l’application.
+
+Alors pour cela et pour effectuer ce travail, je vais suivre les étapes suivantes :
+
+Je dois refactoriser mon application. Cette étape consiste simplement à accéder au fichier ProductsComponent.ts, puis à identifier les différents attributs qui décrivent l’état de ce composant, et ensuite à les déplacer vers notre service que nous allons nommer AppStateService. Nous allons déclarer un dictionnaire qui va contenir les états du ProductsComponent. Ensuite, nous allons créer un setter pour mettre à jour les différents attributs de cet état comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/dc1caac2-4d39-4c72-8a15-01efca228a8c)
+
+Dans l'exemple ci-dessus, nous avons une variable qui contient l'ensemble des variables caractérisant l'état de ProductsComponent, avec un constructeur et un setter pour mettre à jour les différents attributs.
+
+Maintenant, nous devons injecter un objet de type AppStateService en utilisant le constructeur. Avec ce service, nous allons centraliser les différentes données partagées dans l'application.
+
+Ensuite, nous avons ajouté deux autres composants : un pour les erreurs et un autre pour la barre de navigation, comme suit :
+
+Le premier composant, app-errors :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/e12dab81-192c-48a8-81af-174334457b65)
+ 
+Voici le code qui corresponde a ce composant :  
+  Le deusiemme composant navbar : 
+ ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/04b773c5-fe7d-49e3-b8db-274e3deef717)
+
+  Voici le code de composant navbar : 
+ ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/6bc9bb6f-d5c1-4da8-baa8-0f6829909425)
+
+On a fait une petit modification dans le composant app.component.html comme suite: 
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/af094608-4d51-4958-9638-4068ba9c682d)
+
+5.	 Voici une petit vue sur le product.component.ts apres l’ajoute de service AppStateService : 
+ ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/4d67cdbe-131f-4b21-8461-56ea9092df59)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/1449e52e-f498-45bc-a627-ad49b4cfc182)
+
+Voici le code  du product.component.ts :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/35d28aa6-f768-4960-b5d8-8cde27877370)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/d563534a-0eff-4c66-b1c6-40b8e0d8ef64)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/4ce21097-1d36-487e-a819-df84a173b384)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/455456e9-ec4b-4b27-9667-dbff30c32fe6)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/1f8e82cc-22f1-4e08-ae90-e4ccc64ffa20)
+
+Selon le code précédent, si une erreur survient lors de l'exécution du code, celle-ci sera affichée dans le composant app-errors, tel que nous avons essayé de l'inclure dans le composant principal app.component.html.
+
+#### Problème :
+  Le problème rencontré jusqu'à présent est que je suis obligé à chaque fois, dans n'importe quelle partie du
+  programme, d'appeler la fonction setAppStateProducts() qui se trouve dans le service AppStateProduct pour
+  mettre à jour la valeur de status dans le dictionnaire productsState. Ce n'est pas optimal car je dois
+  constamment mettre à jour cette valeur de status.
+
+#### La solution :
+    Utiliser un intercepteur HTTP. Comme nous le savons, pour toute application front-end, il est nécessaire de
+    créer des intercepteurs HTTP. Un intercepteur HTTP est un service qui intercepte toutes les requêtes HTTP.
+    Par exemple, pour l'authentification, à chaque fois que nous envoyons une requête, nous devons ajouter l'en
+    tête d'autorisation et d'autres paramètres. L'intercepteur gère cette tâche.
+    
+    Dans notre cas, nous devons simplement mettre à jour le statut d'une requête. L'intercepteur va donc mettre
+    à jour le statut à "LOADING" lorsqu'une requête est envoyée, puis après réception de la réponse, il mettra
+    à jour le statut soit à "ERROR", soit à "LOADED", en fonction du résultat. Cela nous évite de faire des
+    copier-coller répétitifs et simplifie notre code.
+
+Maintenant, voyons comment créer et utiliser un intercepteur :
+##### Création d'un intercepteur :
+                                $ ng g interceptor services/app-http
 
 
+Nous avons utilisé le dossier des services pour créer l'intercepteur, car un intercepteur est également un service.
 
+##### Après avoir exécuté cette commande, deux fichiers seront créés : app-http.interceptor.ts et son fichier de spécifications.
+
+##### Dans le fichier app-http.interceptor.ts, nous trouvons le code initial de la création d'un conteneur, que nous supprimons. Ensuite, nous programmons une classe qui implémente HttpInterceptor, comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/bafb6f9f-6085-4772-a00c-cb45192a81a6)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/0d8cbcd6-64de-4e38-bb1c-d259bafde168)
+
+Alors comme vous pouvez le voir, pour activer cet intercepteur, il faut le déclarer dans le fichier app.module.ts dans la section providers comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/d7fe906c-92ff-432b-b969-a55f57c29ea7)
+
+Alors nous devons apporter une petite modification dans le service loadingService.ts en le créant tout en injectant un objet de type AppStateService. Ensuite, nous injectons le service loadingService dans notre AppHttpInterceptor, et ainsi nous utilisons l'une des méthodes pour surveiller l'état de la requête.
+
+Nous allons modifier la condition qui nous permet d'afficher le spinner comme suit :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/065de45e-1b65-47a6-b439-ebfbbbc26e33)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/17593e50-352d-4e21-9659-3b0a8b5ba308)
+
+#### REMARQUE :
+    La seule chose à garder à l'esprit est que l'objet isValid$ dans le service LoadingService est de type
+    observable. Ainsi, chaque fois que nous voulons l'utiliser ou le consulter, nous pouvons le faire en
+    souscrivant pour récupérer sa valeur et ensuite l'affecter à d'autres variables.
 
