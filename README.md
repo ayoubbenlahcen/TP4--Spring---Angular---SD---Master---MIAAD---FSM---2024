@@ -593,12 +593,46 @@ Alors jusqu’à maintenant, nous n'avons pas inclus la partie sécurité, car n
 
 Heureusement, il existe un concept qui nous permet de traiter cela (la sécurité) : les gardes (guards), qui sont des services nous permettant de protéger les routes.
 
-Voici comment créer un garde :
-                      $ ng g g guards/authentication
+### Voici comment créer un garde :
+                      $ ng g g guards/nom_de_garde
                       
 Après avoir lancé cette commande, il faut choisir le type de garde. Il existe différents types, mais nous allons choisir :  CanActivate
 
-Pour notre besoin, nous avons besoin de deux gardes : authentication et authorization, que nous allons créer.
+Pour notre besoin, nous avons besoin de deux gardes : Authentication et Authorization, que nous allons créer.
+
+//////////////////////////////////////////////
+
+Voici comment créer le garde Authentication:
+                      $ ng g g guards/Authentication
+Voici le code à ajouter dans le garde Authorization :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/74f94715-0d00-4b86-b8a1-2f56689e4a82)
+
+Voici comment créer un garde Authorization:
+                      $ ng g g guards/Authorization 
+Voici le code à ajouter dans le garde Authorization :
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/ca4193c5-986e-42f3-9d53-d9a1aa53dbe0)
+
+### Sans ublier de faire parler sur les intercepteurs : 
+Un intercepteur HTTP permet de modifier ou d'interagir avec les requêtes et réponses HTTP globalement avant qu'elles ne soient envoyées ou après qu'elles aient été reçues.
+
+Alos voici comment on peut creer un intercepteur : 
+        $   ng g interceptor services/app-http
+        dans notre cas l'intercepteur prend comme nom  app-http vous pouvez specifier le nom que vou voulez 
+
+        Déclarer l'Intercepteur dans la partie providers dans le Module Voici comment : 
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/8bf57dbe-9857-40af-b4f9-241a780bdfe7)
+
+En suite on est libre dans le cpde quand on veux faire dans notre intercepteur pour nous voici qu'est ce que on a fairt comme code : 
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/63fd570d-744f-42a0-bd10-aa82780594c6)
+
+alors ce code a comme Objectifs est  :
+######         Gérer l'état de chargement :
+                    Avant d'envoyer une requête, le spinner de chargement est affiché.
+                    Après la réponse de la requête (qu'elle réussisse ou échoue), le spinner est caché.
+
+
+
+
 
 
 
