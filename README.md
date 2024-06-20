@@ -612,27 +612,74 @@ Voici comment créer un garde Authorization:
 Voici le code à ajouter dans le garde Authorization :
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/ca4193c5-986e-42f3-9d53-d9a1aa53dbe0)
 
-### Sans ublier de faire parler sur les intercepteurs : 
+### Sans ublier de faire parler sur les Intercepteurs HTTP: 
 Un intercepteur HTTP permet de modifier ou d'interagir avec les requêtes et réponses HTTP globalement avant qu'elles ne soient envoyées ou après qu'elles aient été reçues.
 
-Alos voici comment on peut creer un intercepteur : 
+##### Création d'un intercepteur :
+        1. Alors voici comment on peut creer un intercepteur : 
         $   ng g interceptor services/app-http
-        dans notre cas l'intercepteur prend comme nom  app-http vous pouvez specifier le nom que vou voulez 
+        Dans notre cas, l'intercepteur est nommé app-http, mais vous pouvez spécifier le nom que vous voulez. 
 
-        Déclarer l'Intercepteur dans la partie providers dans le Module Voici comment : 
+        2. Déclaration de l'intercepteur dans le module :
+            Déclarez l’intercepteur dans la partie providers du module. Voici comment : 
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/8bf57dbe-9857-40af-b4f9-241a780bdfe7)
 
-En suite on est libre dans le cpde quand on veux faire dans notre intercepteur pour nous voici qu'est ce que on a fairt comme code : 
+        3. Ensuite, vous êtes libre de coder ce que vous voulez dans votre intercepteur. Pour nous, voici le
+        code que nous avons utilisé :
 ![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/63fd570d-744f-42a0-bd10-aa82780594c6)
 
-alors ce code a comme Objectifs est  :
+        Alors ce code a comme Objectifs est  :
 ######         Gérer l'état de chargement :
-                    Avant d'envoyer une requête, le spinner de chargement est affiché.
-                    Après la réponse de la requête (qu'elle réussisse ou échoue), le spinner est caché.
+                    - Avant d'envoyer une requête, le spinner de chargement est affiché.
+                    - Après la réponse de la requête (qu'elle réussisse ou échoue), le spinner est caché.
 
+### La Centralisation des Données : 
+    Une des choses les plus importantes à connaître dans Angular est comment centraliser les données ou les
+    partager entre les différents composants. Cela signifie que n'importe quel composant peut accéder et
+    utiliser ces données.
+    
+    Nous pouvons faire cela à l'aide de services. Vous pouvez créer un service dans lequel vous déclarez l'état
+    de chaque composant sous forme d'un objet JSON qui va contenir les attributs ou bien les données qui
+    caractérisent l'état de ce composant au cours de l'application. Vous devez également créer un setter pour 
+    mettre à jour ces données. Voici comment nous avons fait :
 
+    1. Créer un service AppStateService :
+    2. Spécifier les données à centraliser :
 
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/e9ba1cca-86bd-4aa5-a877-31fc9ccc0e4a)
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/609062fd-d316-48c9-9dc6-922017d67457)
 
+     Zlors voici quelque Points Clés   qu'il faut connaitre :
+           - @Injectable({ providedIn: 'root' }) : Cela rend le service disponible globalement dans
+           l'application sans avoir à l'ajouter dans les providers de chaque module.
+           
+           - La classe AppStateService est définie pour centraliser l'état de l'application.
+           
+           - productsState : Un objet qui contient l'état lié aux produits, avec les propriétés suivantes :
+                            products : Un tableau de produits.
+                            keyword : Le mot-clé utilisé pour rechercher des produits.
+                            totalPages : Le nombre total de pages.
+                            pageSize : Le nombre de produits par page.
+                            currentPage : La page actuelle.
+                            totalProducts : Le nombre total de produits.
+                            status : L'état actuel (par exemple, "LOADING", "LOADED", "ERROR").
+                            errorMessage : Tout message d'erreur associé à l'état des produits.
 
+            - authState : Un objet qui contient l'état d'authentification, avec les propriétés suivantes :
+                            username : Le nom d'utilisateur.
+                            roles : Les rôles de l'utilisateur.
+                            isAuthenticated : Un booléen indiquant si l'utilisateur est authentifié.
+                            token : Le jeton d'authentification.
+     
+            - Un constructeur vide, car ce service n'a besoin d'aucune dépendance pour être injecté.
 
+            - setProductState : Cette méthode met à jour l'état des produits en fusionnant l'état actuel avec
+            un nouvel état passé en paramètre. Cela permet de mettre à jour une partie de productsState sans
+            modifier les autres parties.
+            
+            - setAuthState    : De même, cette méthode met à jour l'état d'authentification en fusionnant
+            l'état actuel avec un nouvel état passé en paramètre.
+           
+
+![image](https://github.com/ayoubbenlahcen/TP4--Spring---Angular---SD---Master---MIAAD---FSM---2024/assets/152870306/7e13608b-f70d-44f3-8735-8a50a15a2373)
 
